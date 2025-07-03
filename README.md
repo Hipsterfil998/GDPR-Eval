@@ -25,7 +25,7 @@ A comprehensive evaluation framework for assessing machine translation quality o
 ## Features
 
 - **Document Processing**: Automatic extraction and alignment of multilingual GDPR sentences
-- **Translation Generation**: Integration with various LLM models (Gemma, GPT, etc.) via Ollama
+- **Translation Generation**: Integration with various LLM models (Gemma, LlaMa, etc.) via Ollama
 - **Quality Assessment**: Multiple evaluation metrics including COMET, punctuation consistency, and length ratios
 - **Batch Processing**: Efficient processing of large document collections
 - **CSV Export**: Results exported in structured format for further analysis

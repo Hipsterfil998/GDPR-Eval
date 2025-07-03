@@ -2,6 +2,8 @@
 
 A comprehensive evaluation framework for assessing machine translation quality on GDPR legal documents. GDPR-Eval processes multilingual GDPR texts from [EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng), generates translations using local large language models, and evaluates translation quality using multiple automatic metrics.
 
+<img src="Testa_di_Marianna/app_images/Schermata_marianna.png" alt="GDPR-Eval"/>
+
 ## Table of Contents
 
 - [Features](#features)

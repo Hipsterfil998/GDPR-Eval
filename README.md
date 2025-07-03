@@ -1,4 +1,4 @@
-# GDPREval
+# GDPR-Eval
 
 A comprehensive evaluation framework for assessing machine translation quality on GDPR legal documents. GDPREval processes multilingual GDPR texts, generates translations using large language models, and evaluates translation quality using multiple automatic metrics.
 

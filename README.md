@@ -1,6 +1,24 @@
-# GDPR-Eval
+# GDPREval
 
-A comprehensive evaluation framework for assessing machine translation quality on GDPR legal documents. GDPREval processes multilingual GDPR texts, generates translations using large language models, and evaluates translation quality using multiple automatic metrics.
+A comprehensive evaluation framework for assessing machine translation quality on GDPR legal documents. GDPREval processes multilingual GDPR texts from [EURlex](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng), generates translations using local large language models, and evaluates translation quality using multiple automatic metrics.
+
+## Table of Contents
+
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Evaluation Metrics](#evaluation-metrics)
+- [Output Format](#output-format)
+- [Dependencies](#dependencies)
+- [Customization](#customization)
+- [Performance Considerations](#performance-considerations)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+- [Citation](#citation)
+- [Acknowledgments](#acknowledgments)
 
 ## Features
 
@@ -53,8 +71,8 @@ HF_TOKEN=your_huggingface_token_here
 ```
 
 5. **Install Ollama** (for LLM models)
+Follow the installation guide at [ollama.ai](https://ollama.ai/)
 ```bash
-# Follow instructions at https://ollama.ai/
 # Pull required models:
 ollama pull gemma3:27B
 ```
@@ -127,7 +145,7 @@ The pipeline calculates several automatic metrics:
 
 ### COMET Score
 - **Range**: 0-1 (higher is better)
-- **Description**: Neural metric trained on human judgments
+- **Description**: Neural metric trained on human judgments ([Unbabel/COMET](https://github.com/Unbabel/COMET))
 - **Usage**: Primary quality indicator
 
 ### Punctuation Consistency
@@ -163,13 +181,13 @@ Results are saved as CSV with columns:
 ## Dependencies
 
 Core dependencies:
-- `pandas`: Data manipulation
-- `transformers`: HuggingFace models
-- `comet-ml`: COMET evaluation metric
-- `torch`: PyTorch for model inference
-- `evaluate`: HuggingFace evaluation metrics
-- `python-dotenv`: Environment variable management
-- `huggingface-hub`: Model downloading
+- [`pandas`](https://pandas.pydata.org/): Data manipulation
+- [`transformers`](https://huggingface.co/docs/transformers): HuggingFace models
+- [`comet-ml`](https://github.com/Unbabel/COMET): COMET evaluation metric
+- [`torch`](https://pytorch.org/): PyTorch for model inference
+- [`evaluate`](https://huggingface.co/docs/evaluate): HuggingFace evaluation metrics
+- [`python-dotenv`](https://github.com/theskumar/python-dotenv): Environment variable management
+- [`huggingface-hub`](https://huggingface.co/docs/huggingface_hub): Model downloading
 
 ## Customization
 
@@ -218,7 +236,7 @@ Extend `GDPRProcessor` to support additional document formats:
    - Verify sufficient disk space
 
 2. **Ollama Connection**
-   - Ensure Ollama service is running
+   - Ensure [Ollama service](https://ollama.ai/) is running
    - Verify model is pulled: `ollama list`
    - Check model name spelling
 
@@ -230,19 +248,23 @@ Extend `GDPRProcessor` to support additional document formats:
 ### Error Messages
 
 - `Model not found`: Pull model with `ollama pull model_name`
-- `Token authentication failed`: Check HF_TOKEN in `.env`
+- `Token authentication failed`: Check `HF_TOKEN` in `.env`
 - `CUDA out of memory`: Reduce batch size or use CPU
+
+For more troubleshooting, see the [Issues](../../issues) section.
 
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch: `git checkout -b feature-name`
 3. Add tests for new functionality
-4. Submit a pull request
+4. Submit a [pull request](../../pulls)
+
+Please read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
 
 ## Citation
 
@@ -251,7 +273,7 @@ If you use this evaluation framework in your research, please cite:
 ```bibtex
 @software{gdpreval,
   title={GDPREval: A Framework for Evaluating Machine Translation Quality on Legal Documents},
-  author={Filippo Pellegrino},
+  author={Your Name},
   year={2025},
   url={https://github.com/your-repo/gdpreval}
 }
@@ -259,7 +281,7 @@ If you use this evaluation framework in your research, please cite:
 
 ## Acknowledgments
 
-- COMET metric by Unbabel
-- HuggingFace Transformers library
-- Ollama project for local LLM inference
-- EUR-Lex for GDPR document provision
+- [COMET metric](https://github.com/Unbabel/COMET) by Unbabel
+- [HuggingFace Transformers](https://huggingface.co/docs/transformers) library
+- [Ollama project](https://ollama.ai/) for local LLM inference
+- [EUR-Lex](https://eur-lex.europa.eu/) for GDPR document provision

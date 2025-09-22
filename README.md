@@ -275,7 +275,7 @@ If you use this evaluation framework in your research, please cite:
 ```bibtex
 @software{gdpreval,
   title={GDPREval: A Framework for Evaluating Machine Translation Quality on Legal Documents},
-  author={Your Name},
+  author={Filippo Pellegrino},
   year={2025},
   url={https://github.com/your-repo/gdpreval}
 }

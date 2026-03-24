@@ -51,8 +51,7 @@ class GDPRProcessor:
         Read entire text file at once.
         """
         with open(filename, 'r', encoding='utf-8') as file:
-            content = file.read()
-            return content
+            return file.read()
     
     def split_articles(self, language: str, text: str) -> List[str]:
         """
@@ -249,35 +248,27 @@ class GDPRProcessor:
             print(f"Created evaluation set with {len(sampled)} sentences")
             return sampled
     
-    def create_evaluation_set(self, 
+    def _apply_special_chars(self, texts: List[str], special_chars: List[str]) -> List[str]:
+        """
+        Apply special character substitution replacing double newlines.
+        """
+        replacement = ''.join(special_chars)
+        return [re.sub(r'\n\n', replacement, text) for text in texts]
+
+    def create_evaluation_set(self,
                             sentences: List[str],
                             sample_size: Optional[int] = None,
                             special_chars: Optional[List[str]] = None) -> List[str]:
         """
         Create evaluation set from extracted sentences.
         """
-        # Use provided sample_size or default from instance
         size = sample_size if sample_size is not None else self.sample_size
-        
-        # Random sample
         sample_count = min(size, len(sentences))
         eval_set = random.sample(sentences, sample_count)
-        
-        # Process special characters if provided
+
         if special_chars is not None:
-            pattern = r'\n\n'
-            
-            # Determine replacement string
-            if len(special_chars) == 1:
-                replacement = special_chars[0]
-            elif len(special_chars) == 2:
-                replacement = special_chars[0] + special_chars[1]
-            else:
-                replacement = ''.join(special_chars)
-            
-            # Apply substitution
-            eval_set = [re.sub(pattern, replacement, sentence) for sentence in eval_set]
-        
+            eval_set = self._apply_special_chars(eval_set, special_chars)
+
         print(f"Created evaluation set with {len(eval_set)} sentences")
         return eval_set
     
@@ -350,22 +341,11 @@ class GDPRProcessor:
         
         # Step 3: Apply special character substitution if needed
         if special_chars is not None:
-            pattern = r'\n\n'
-            
-            # Determine replacement string
-            if len(special_chars) == 1:
-                replacement = special_chars[0]
-            elif len(special_chars) == 2:
-                replacement = special_chars[0] + special_chars[1]
-            else:
-                replacement = ''.join(special_chars)
-            
-            # Apply substitution based on return type
             if by_language:
                 for lang_code in eval_set:
-                    eval_set[lang_code] = [re.sub(pattern, replacement, sentence) for sentence in eval_set[lang_code]]
+                    eval_set[lang_code] = self._apply_special_chars(eval_set[lang_code], special_chars)
             else:
-                eval_set = [re.sub(pattern, replacement, sentence) for sentence in eval_set]
+                eval_set = self._apply_special_chars(eval_set, special_chars)
         
         print("Pipeline completed successfully!")
         return eval_set

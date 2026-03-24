@@ -1,4 +1,3 @@
-import pandas as pd
 from typing import List, Dict, Any, Optional
 from comet import download_model, load_from_checkpoint
 import os
@@ -97,7 +96,7 @@ class AutomaticMetrics:
     def __init__(self, 
                  output_file: Optional[str] = None,
                  symbol_delimiter: Optional[str] = None,
-                 punctuation: Optional[list[str]] = ['.', ','],
+                 punctuation: Optional[List[str]] = ['.', ','],
                  comet_model: Optional[str] = "Unbabel/XCOMET-XL"):
         """
         Initialize the AutomaticMetrics class.
@@ -106,7 +105,7 @@ class AutomaticMetrics:
             output_file (Optional[str]): Path for the output CSV file
             symbol_delimiter (Optional[str]): Delimiter for symbol consistency check.
                                             If None, symbol consistency is not calculated.
-            punctuation (Optional[list[str]]): List of punctuation marks to check consistency.
+            punctuation (Optional[List[str]]): List of punctuation marks to check consistency.
                                              If None, punctuation consistency is not calculated.
             comet_model (Optional[str]): COMET model name for quality scoring.
                                        If None, COMET scores are not calculated.
@@ -233,7 +232,7 @@ class AutomaticMetrics:
             processed_item['len_ratio'] = self._calculate_length_ratio(source, translation)
             
             # Add COMET score if available
-            if comet_scores and i < len(comet_scores):
+            if comet_scores is not None and i < len(comet_scores):
                 processed_item['comet_score'] = comet_scores[i]
             
             metrics.append(processed_item)

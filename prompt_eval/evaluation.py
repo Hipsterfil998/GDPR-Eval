@@ -1,5 +1,3 @@
-import pandas as pd
-import glob
 from typing import List, Dict, Any
 from EURlex.Eurlex_gdpr import GDPRProcessor
 from prompt_eval.translator_processor import TranslationProcessor
